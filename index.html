@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Muzica Electronica</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicGroup",
+        "name": "Drexcya",
+        "genre": "Electro",
+        "track": [
+          {"@type": "MusicRecording", "name": "Neon Falls", "releaseDate": "1992", "recordLabel": "Underground Resistance"},
+          {"@type": "MusicRecording", "name": "Black Sea", "releaseDate": "1993", "recordLabel": "Underground Resistance"}
+        ]
+      },
+      {
+        "@type": "MusicGroup",
+        "name": "Aphex Twin", 
+        "genre": "IDM",
+        "track": [
+          {"@type": "MusicRecording", "name": "Windowlicker", "releaseDate": "1999", "recordLabel": "Warp Records"},
+          {"@type": "MusicRecording", "name": "Avril 14th", "releaseDate": "2001", "recordLabel": "Warp Records"}
+        ]
+      },
+      {
+        "@type": "MusicGroup",
+        "name": "Helena Hauff",
+        "genre": "Techno",
+        "track": [
+          {"@type": "MusicRecording", "name": "Sworn to Secrecy Part 1", "releaseDate": "2015", "recordLabel": "Panorama Bar"},
+          {"@type": "MusicRecording", "name": "Lucid Dreams", "releaseDate": "2017", "recordLabel": "Ninja Tune"}
+        ]
+      },
+      {
+        "@type": "MusicGroup", 
+        "name": "DJ Rolando",
+        "genre": "Techno",
+        "track": [
+          {"@type": "MusicRecording", "name": "Knights of the Jaguar", "releaseDate": "1999", "recordLabel": "UR"},
+          {"@type": "MusicRecording", "name": "Jaguar", "releaseDate": "2000", "recordLabel": "UR"}
+        ]
+      },
+      {
+        "@type": "MusicGroup",
+        "name": "Jeff Mills",
+        "genre": "Techno", 
+        "track": [
+          {"@type": "MusicRecording", "name": "The Bells", "releaseDate": "1996", "recordLabel": "Axis"},
+          {"@type": "MusicRecording", "name": "Late Night", "releaseDate": "1997", "recordLabel": "Axis"}
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    table{border-collapse:collapse;margin:20px 0}
+    th,td{border:1px solid #ddd;padding:8px}
+    button{margin:10px;padding:8px}
+    .section{margin:20px 0;border-bottom:2px solid #ccc}
+  </style>
+</head>
+<body>
+  <h1>Muzica Electronica</h1>
+
+  <div class="section">
+    <h2>Date initiale hardcodate</h2>
+    <table id="initialData">
+      <thead>
+        <tr>
+          <th>Artist (schema:musicGroup)</th>
+          <th>Gen (schema:genre)</th>
+          <th>Piesa (schema:MusicRecording)</th>
+          <th>An lansare (schema:releaseDate)</th>
+          <th>Label (schema:recordLabel)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-artist-id="1"><td>Drexcya</td><td>Electro</td><td>Neon Falls</td><td>1992</td><td>Underground Resistance</td></tr>
+        <tr data-artist-id="1"><td>Drexcya</td><td>Electro</td><td>Black Sea</td><td>1993</td><td>Underground Resistance</td></tr>
+        <tr data-artist-id="2"><td>Aphex Twin</td><td>IDM</td><td>Windowlicker</td><td>1999</td><td>Warp Records</td></tr>
+        <tr data-artist-id="2"><td>Aphex Twin</td><td>IDM</td><td>Avril 14th</td><td>2001</td><td>Warp Records</td></tr>
+        <tr data-artist-id="3"><td>Helena Hauff</td><td>Techno</td><td>Sworn to Secrecy Part 1</td><td>2015</td><td>Panorama Bar</td></tr>
+        <tr data-artist-id="3"><td>Helena Hauff</td><td>Techno</td><td>Lucid Dreams</td><td>2017</td><td>Ninja Tune</td></tr>
+        <tr data-artist-id="4"><td>DJ Rolando</td><td>Techno</td><td>Knights of the Jaguar</td><td>1999</td><td>UR</td></tr>
+        <tr data-artist-id="4"><td>DJ Rolando</td><td>Techno</td><td>Jaguar</td><td>2000</td><td>UR</td></tr>
+        <tr data-artist-id="5"><td>Jeff Mills</td><td>Techno</td><td>The Bells</td><td>1996</td><td>Axis</td></tr>
+        <tr data-artist-id="5"><td>Jeff Mills</td><td>Techno</td><td>Late Night</td><td>1997</td><td>Axis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Adaugă piesa noua</h2>
+    <form id="addTrackForm">
+      <select id="artistDropdown">
+        <option value="1">Drexcya</option>
+        <option value="2">Aphex Twin</option>
+        <option value="3">Helena Hauff</option>
+        <option value="4">DJ Rolando</option>
+        <option value="5">Jeff Mills</option>
+      </select>
+      <input type="text" id="trackName" placeholder="Nume piesă" required>
+      <input type="number" id="releaseYear" placeholder="An lansare" required>
+      <input type="text" id="label" placeholder="Label" required>
+      <button type="button" id="addTrackBtn">Adaugă piesă (la tabelul initial)</button>
+    </form>
+  </div>
+
+  <div class="section">
+    <button id="btn1">Trimite tabelul initial la json-server</button>
+    <button id="btn3">GET din json-server</button>
+  </div>
+
+  <div class="section">
+    <h2>Tabel unificat, piese filtrate (mai vechi de 2005)</h2>
+    <table id="filteredData">
+      <thead>
+        <tr><th>Artist</th><th>Gen</th><th>Piesă</th><th>An</th><th>Label</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="fe_script.js"></script>
+</body>
+</html>

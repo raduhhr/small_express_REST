@@ -1,0 +1,101 @@
+{
+  "artists": [
+    {
+      "id": 1,
+      "name": "Drexcya",
+      "genre": "Electro"
+    },
+    {
+      "id": 2,
+      "name": "Aphex Twin",
+      "genre": "IDM"
+    },
+    {
+      "id": 3,
+      "name": "Helena Hauff",
+      "genre": "Techno"
+    },
+    {
+      "id": 4,
+      "name": "DJ Rolando",
+      "genre": "Techno"
+    },
+    {
+      "id": 5,
+      "name": "Jeff Mills",
+      "genre": "Techno"
+    }
+  ],
+  "tracks": [
+    {
+      "artistId": 1,
+      "name": "Neon Falls",
+      "releaseDate": 1992,
+      "recordLabel": "Underground Resistance",
+      "id": 1
+    },
+    {
+      "artistId": 1,
+      "name": "Black Sea",
+      "releaseDate": 1993,
+      "recordLabel": "Underground Resistance",
+      "id": 2
+    },
+    {
+      "artistId": 2,
+      "name": "Windowlicker",
+      "releaseDate": 1999,
+      "recordLabel": "Warp Records",
+      "id": 3
+    },
+    {
+      "artistId": 2,
+      "name": "Avril 14th",
+      "releaseDate": 2001,
+      "recordLabel": "Warp Records",
+      "id": 4
+    },
+    {
+      "artistId": 3,
+      "name": "Sworn to Secrecy Part 1",
+      "releaseDate": 2015,
+      "recordLabel": "Panorama Bar",
+      "id": 5
+    },
+    {
+      "artistId": 3,
+      "name": "Lucid Dreams",
+      "releaseDate": 2017,
+      "recordLabel": "Ninja Tune",
+      "id": 6
+    },
+    {
+      "artistId": 4,
+      "name": "Knights of the Jaguar",
+      "releaseDate": 1999,
+      "recordLabel": "UR",
+      "id": 7
+    },
+    {
+      "artistId": 4,
+      "name": "Jaguar",
+      "releaseDate": 2000,
+      "recordLabel": "UR",
+      "id": 8
+    },
+    {
+      "artistId": 5,
+      "name": "The Bells",
+      "releaseDate": 1996,
+      "recordLabel": "Axis",
+      "id": 9
+    },
+    {
+      "artistId": 5,
+      "name": "Late Night",
+      "releaseDate": 1997,
+      "recordLabel": "Axis",
+      "id": 10
+    }
+  ]
+}
