@@ -1,77 +1,134 @@
-# Electronic Music Mini App – FE + BE
+# small_express_REST
 
-A small project I put together to experiment with basic frontend-backend interaction. The app lets you manage a list of electronic music artists and tracks, with some simple data filtering.
-
-The frontend uses plain HTML and JavaScript (with Axios for AJAX calls), and the backend is built with Express. JSON Server acts as a mock database.
-
----
-
-## What it does
-
-- The HTML file contains hardcoded data (artists + tracks).
-- You can:
-  - Send that data to a mock database.
-  - Add new tracks to the initial table.
-  - Fetch and display only tracks released before 2005, joined with the artist info.
+A mini full-stack experiment combining a **plain HTML/JS frontend**, an **Express backend**, and a **JSON Server** mock database.  
+The app demonstrates basic **frontend–backend interaction**, data posting, and filtering.
 
 ---
 
-## Stack
+## Overview
 
-- Frontend: HTML + JS (with Axios)
-- Backend: Node.js + Express
-- DB: JSON Server
+- **Frontend (`index.html` + `fe_script.js`)**
+  - Hardcoded initial data: electronic music artists & tracks.
+  - Add new tracks to the table via a small form.
+  - Buttons to:
+    - Send all table data to the backend.
+    - Fetch tracks (filtered by year ≤ 2005) from the backend/DB.
+
+- **Backend (`be_server.js`)**
+  - Built with Express.
+  - Routes:
+    - `POST /send-data` → clears DB then inserts artists + tracks.
+    - `GET /fetch-data` → joins artists + tracks, filtering only tracks released ≤ 2005.
+  - Talks to JSON Server (mock DB) via Axios.
+
+- **Database (`db.json` + JSON Server)**
+  - Two collections: `artists` and `tracks`.
+  - Seeded with the same initial data from the frontend.
+
+**Result:**  
+You can open `index.html`, send its data into JSON Server through the Express backend, and then fetch a joined, filtered view of tracks older than 2005.
 
 ---
 
-## How to run
+## How It Works
 
-Tested on Linux Mint, but should work the same on Windows/macOS.
+```
+Frontend (index.html + fe_script.js)
+ ├─ Show initial table (artists + tracks)
+ ├─ Add new rows manually
+ ├─ POST all data → Express backend (/send-data)
+ └─ GET filtered tracks (≤2005) → show in a second table
 
-### 1. Unzip the project into a folder
+Backend (be_server.js)
+ ├─ POST /send-data: 
+ │    • Wipe DB (artists + tracks)
+ │    • Insert fresh data
+ └─ GET /fetch-data:
+      • Fetch all artists
+      • Fetch tracks where releaseDate ≤ 2005
+      • Join by artistId → return combined objects
 
-### 2. Open a terminal in that folder
-
-### 3. Install dependencies:
-
-```bash
-npm install express@5.1.0 axios@1.9.0 cors@2.8.5 json-server@0.17.0
+Database (db.json via json-server)
+ ├─ Collection: artists
+ └─ Collection: tracks
 ```
 
-### 4. Start the servers (in separate terminals):
+---
 
-- JSON Server:
-  ```bash
-  npx json-server --watch db.json --port 4000
-  ```
+## Repo Layout
 
-- Express backend:
-  ```bash
-  node be_server.js
-  ```
-
-### 5. Open `index.html` in Chrome
-
-No build tools, no framework – just open the file.
+```
+small_express_REST/
+├── be_server.js       # Express backend
+├── fe_script.js       # Frontend JS logic (send/fetch/add)
+├── index.html         # Frontend UI
+├── db.json            # JSON Server mock DB
+├── package.json       # Dependencies
+├── package-lock.json
+└── README.md
+```
 
 ---
 
-## How it works
+## Installation
 
-- Initial data is embedded in the HTML.
-- Clicking the “Trimite tabelul” button sends the data to the backend, which pushes it to the mock database.
-- You can add new tracks manually to the table.
-- The “GET” button fetches tracks released before 2005 and shows them in a separate table, along with their artist info.
+### Prerequisites
+- Node.js v18+ recommended
+- Chrome/Firefox for opening `index.html`
+
+### Install dependencies
+```bash
+npm install
+```
+
+(Explicit versions are in `package.json`: Express 5.1, Axios 1.9, CORS 2.8.5, JSON Server 0.17)
 
 ---
 
-## Ports used
+## Usage
 
-- JSON Server: http://localhost:4000
-- Express backend: http://localhost:5000
+Start servers (each in its own terminal):
+
+1. **JSON Server (port 4000):**
+   ```bash
+   npx json-server --watch db.json --port 4000
+   ```
+
+2. **Express backend (port 5000):**
+   ```bash
+   node be_server.js
+   ```
+
+3. **Frontend:**
+   - Open `index.html` in your browser.
+   - Use the form/buttons:
+     - *“Trimite tabelul initial la json-server”* → send data.
+     - *“GET din json-server”* → fetch & display tracks released before 2005.
 
 ---
 
-## Why I kept it
+## Example Flow
 
-It’s nothing fancy, but it works, and I spent a few hours on it. Figured I’d keep it public – no private data, just localhost stuff. If someone really wants to hack it, they’d have to hack my machine first.
+1. Page loads → initial hardcoded table with Drexcya, Aphex Twin, Helena Hauff, DJ Rolando, Jeff Mills.
+2. Click *Trimite tabelul* → data sent to Express → DB populated.
+3. Click *GET* → backend filters tracks (`releaseDate ≤ 2005`) → joined with artists → displayed in second table.
+
+---
+
+## Ports Used
+
+- JSON Server: **http://localhost:4000**
+- Express backend: **http://localhost:5000**
+
+---
+
+## Why it Exists
+
+Just a practice project — simple but functional.  
+Shows how a plain HTML frontend can interact with a Node.js backend and a mock DB.  
+
+---
+
+## License
+
+MIT
